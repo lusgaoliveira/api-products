@@ -47,7 +47,53 @@ const disable = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+const updateClient = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let { name, email, bornDate, status } = req.body;
+        if (isNaN(parseInt(id))) {
+            return res.status(400).json({ error: 'Invalid id'});
+        }
+
+        if (!name && !email && !bornDate && !status) {
+            return res.status(400).json({ error: 'At least one field needs to be provide'})
+        }
+        bornDate = new Date(bornDate);
+        const updateClient = await ClientRepository.update(id, { name, email, bornDate, status})
+        res.status(200).json(updateClient);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const findAllClients = async (req, res) => {
+    try {
+        const clients = await ClientRepository.findAll();
+        res.status(200).json(clients);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const findById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (isNaN(parseInt(id))) {
+            return res.status(400).json({ error: 'Invalid id'});
+        }
+
+        const client = await ClientRepository.findById(id);
+        res.status(200).json(client);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
 module.exports = {
     register,
-    disable
+    disable,
+    updateClient,
+    findAllClients,
+    findById
 }

@@ -1,44 +1,40 @@
 const connectDB = require('../config/db');
-const { validateClient } = require('../validators/clientValidator');
+const { validateProduct } = require('../validators/productValidator');
 
-
-class ClientRepository {
-
+class ProductRepository {
     static async save(data) {
         const db = await connectDB();
         try {
-            
-            const validatedClient = validateClient(data);
-            
-            if (!validatedClient.isValid) {
-                console.error('Erro na validação:', validatedClient.errors); 
-                throw new Error('Client data is invalid');
+            const validatedProduct = validateProduct(data);
+            if (!validatedProduct.isValid) {
+                console.error('Validation error:', validatedProduct.errors); 
+                throw new Error('Product data is invalid');
             }
-            
+
             const query = `
-                INSERT INTO clients (name, email, born_date) 
-                VALUES ($1, $2, $3)    
+                INSERT INTO products (name, brand, price, quantity) 
+                VALUES ($1, $2, $3, $4)    
                 RETURNING *;
             `;
             
             const result = await db.query(query, [
-                validatedClient.data.name, 
-                validatedClient.data.email,
-                validatedClient.data.bornDate
+                validatedProduct.data.name, 
+                validatedProduct.data.brand,
+                validatedProduct.data.price,
+                validatedProduct.data.quantity
             ]);
-            
             return result.rows[0];
         } catch (error) {
-            console.error('Error inserting client:', error.message);
+            console.error('Error inserting product:', error.message);
             throw error;
-        } 
+        }
     }
 
     static async innactive(id) {
         const db = await connectDB();
         try {
             const query = `
-                UPDATE clients 
+                UPDATE products 
                 SET status = 'innactive'
                 WHERE id = $1
                 RETURNING *;
@@ -48,7 +44,7 @@ class ClientRepository {
             if (result.rowCount === 0) throw new Error('Client not found');
             return result.rows[0];
         } catch (error) {
-            console.error('Error innactive client:', error.message);
+            console.error('Error innactive product:', error.message);
             throw error;
         }
     }
@@ -56,62 +52,63 @@ class ClientRepository {
     static async update(id, data) {
         const db = await connectDB();
         try {
-            const validatedClient = validateClient(data);
-            if (!validatedClient.isValid) {
-                console.error('Error in validation:', validatedClient.errors); 
+            const validatedProduct = validateProduct(data);
+            if (!validatedProduct.isValid) {
+                console.error('Error in validation:', validatedProduct.errors); 
                 throw new Error('Client data is invalid');
             }
             
             const query = `
-                UPDATE clients 
-                SET name = $1, email = $2
-                WHERE id = $3
+                UPDATE products 
+                SET name = $1, brand = $2, price = $3, quantity = $4
+                WHERE id = $5
                 
             `;
             const result = await db.query(query, [
-                validatedClient.data.name, 
-                validatedClient.data.email,
+                validatedProduct.data.name, 
+                validatedProduct.data.brand,
+                validatedProduct.data.price,
+                validatedProduct.data.quantity,
                 id
             ]);
-            if(result.rowCount === 0) throw new Error('Id client not found');
+            if(result.rowCount === 0) throw new Error('Id product not found');
             return result.rows[0];
         } catch (error) {
-            console.error('Error in the update client function:', error.message);
+            console.error('Error in the update product function:', error.message);
             throw error;
         }
     }
-
     static async findAll() {
         const db = await connectDB();
         try {
             const query = `
                 SELECT * 
-                FROM clients
+                FROM products
             `;
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
-            console.error('Error in the find all client function:', error.message);
+            console.error('Error in the find all products function:', error.message);
             throw error;
         }
     }
-
     static async findById(id) {
         const db = await connectDB();
         try {
             const query = `
-                SELECT * FROM clients
+                SELECT * 
+                FROM products
                 WHERE id = $1;      
             `;
             const result = await db.query(query, [id]);
 
-            if (result.rowCount === 0) throw new Error('Client not found');
+            if (result.rowCount === 0) throw new Error('Product not found');
             return result.rows[0];
         } catch (error) {
-            console.error('Error finding client with this id:', error.message);
+            console.error('Error finding product with this id:', error.message);
             throw error;
         }
     }
 }
 
-module.exports = ClientRepository;
+module.exports = ProductRepository;
