@@ -117,10 +117,9 @@ npx expo start
 ```
 
 5. Abra o aplicativo e/ou:
-```
-- Escaneie o QR Code exibido no terminal ou na interface do Expo usando o app Expo Go no seu dispositivo.
-- Alternativamente, execute o app em um emulador configurado.
-```
+    - Escaneie o QR Code exibido no terminal ou na interface do Expo usando o app Expo Go no seu dispositivo.
+    - Alternativamente, execute o app em um emulador configurado.
+
 
 
 ## Licença
