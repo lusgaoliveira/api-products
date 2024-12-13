@@ -21,6 +21,19 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
     /validators   -> Responsável por validar os dados das entidades
 
 ```
+
+## 📁 Estrutura do Mobile
+
+```
+/mobile
+    /assets         -> Arquivos estáticos (imagens, ícones, fontes)
+    /components     -> Componentes reutilizáveis
+    /navigation     -> Configuração de navegação (React Navigation)
+    /screens        -> Telas do aplicativo (ex.: Home, UpdateClient)
+    /App.tsx        -> Arquivo principal do app
+    /package.json   -> Dependências do projeto
+    tsconfig.json   -> Configurações do TypeScript
+```
 ## 🚀 Tecnologias Utilizadas
 
 ### Backend
@@ -32,6 +45,12 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
 - Zod
 - Docker
 - Dotenv
+
+### Mobile
+
+- React Native
+- Expo
+- React Navigation
 
 ## ✍ Utilização da API
 
@@ -71,6 +90,38 @@ docker-compose up
 ```
 npm start
 ```
+
+## ✍ Utilização do Mobile
+
+Para rodar o aplicativo em sua máquina, siga as etapas abaixo:
+
+1. Clone o repositório:
+```
+https://github.com/lusgaoliveira/lolja.git
+```
+
+2. Entre na pasta do projeto e logo em seguida o backend:
+```
+cd lolja
+cd mobile
+```
+
+3. Instale as dependências:
+```
+npm install
+```
+
+4. Inicie o Expo:
+```
+npx expo start
+```
+
+5. Abra o aplicativo e/ou:
+```
+- Escaneie o QR Code exibido no terminal ou na interface do Expo usando o app Expo Go no seu dispositivo.
+- Alternativamente, execute o app em um emulador configurado.
+```
+
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT.
