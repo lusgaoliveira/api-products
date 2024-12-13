@@ -83,7 +83,7 @@ export default function Produtos() {
       setNewQuantity(0);
       setFirstModalIsOpen(false);
     } catch (error) {
-      console.error("Error adding product:", error);
+      alert("Verifique sua informações");
     }
   };
 
@@ -102,7 +102,7 @@ export default function Produtos() {
           setSecondModalIsOpen(false);
           setSelectedProductId(null); // Reset selected client ID
         } catch (error) {
-          console.error("Error updating product:", error);
+          alert("Verifique sua informações");
         }
       }
     };
@@ -116,7 +116,7 @@ export default function Produtos() {
           setThirdModalIsOpen(false); // Close the confirmation modal
           setProductToDelete(null); // Reset the client to delete
         } catch (error) {
-          console.error("Error deleting product:", error);
+          alert("Erro ao deletar");
         }
       }
     };
