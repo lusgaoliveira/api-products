@@ -75,7 +75,7 @@ export default function Cliente() {
       setFirstModalIsOpen(false);
 
     } catch (error) {
-      console.error("Erro ao atualizar cliente:", error);
+      alert("Verifique sua informações");
     }
   };
 
@@ -93,7 +93,7 @@ export default function Cliente() {
           setSecondModalIsOpen(false);
           setSelectedClientId(null);
         } catch (error) {
-          console.error("Erro ao atualizar cliente:", error);
+          alert("Verifique sua informações");
         }
       }
     };
@@ -107,7 +107,7 @@ export default function Cliente() {
           setThirdModalIsOpen(false);
           setClientToDelete(null);
         } catch (error) {
-          console.error("Erro ao deletar cliente:", error);
+          alert("Erro ao deletar Cliente");
         }
       }
     };
