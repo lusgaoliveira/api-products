@@ -18,31 +18,11 @@ interface Compra {
   status: string;
 }
 
-interface Client {
-  id: number;
-  name: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-}
-
 
 const fetcher = async (url: string): Promise<Compra[]> => {
   const response = await axios.get(url);
   return response.data;
 };
-
-const fetchClients = async (url: string): Promise<Client[]> => {
-  const response = await axios.get(url);
-  return response.data;
-};
-
-const fetchProducts = async (url: string): Promise<Product[]> => {
-  const response = await axios.get(url);
-  return response.data; 
-}
 
 export default function Compras() {
   const [firstModalIsOpen, setFirstModalIsOpen] = useState(false);
@@ -57,8 +37,6 @@ export default function Compras() {
 
 
   const { data: purchases, error: purchasesError } = useSWR<Compra[]>('http://localhost:4000/purchases', fetcher);
-  const { data: clients, error: clientsError } = useSWR<Client[]>('http://localhost:4000/clients', fetchClients);
-  const { data: products, error: productsError } = useSWR<Product[]>('http://localhost:4000/products', fetchProducts);
 
   function handleOpenFirstModal() {
     setFirstModalIsOpen(!firstModalIsOpen);
@@ -89,7 +67,7 @@ export default function Compras() {
       setNewTotal(0);
       setFirstModalIsOpen(false);
     } catch (error) {
-      console.error("Error adding purchase:", error);
+      alert("Verifique suas informações")
     }
   };
 
@@ -102,7 +80,7 @@ export default function Compras() {
         setThirdModalIsOpen(false);
         setPurchaseToDelete(null);
       } catch (error) {
-        console.error("Error deleting purchase:", error);
+        alert("Verifique suas informações")
       }
     }
   };
@@ -113,9 +91,7 @@ export default function Compras() {
   }
 
   if (purchasesError) return <div>Error loading purchases</div>;
-  if (clientsError) return <div>Error loading clients</div>;
-  if (productsError) return <div>Error loading products</div>
-  if (!purchases || !clients || !products) return <div>Loading...</div>;
+  if (!purchases) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -157,24 +133,24 @@ export default function Compras() {
         <Modal isOpen={firstModalIsOpen} onClose={handleOpenFirstModal}>
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-center">Add new purchase</h2>
-            <form onSubmit={handleAddPurchase}>
+            <form className="flex flex-col p-4" onSubmit={handleAddPurchase}>
 
               <select value={newProductId} onChange={(e) => setNewProductId(Number(e.target.value))}
-                className="p-2 rounded-sm border border-cl2">
+                className="p-2 rounded-lg border border-cl2 mb-5">
                 <option value={0}>Select Product</option>
-                {products.map(product => (
-                  <option key={product.id} value={product.id}>{product.name}</option>
+                {purchases.map(purchase => (
+                  <option key={purchase.id} value={purchase.id_product}>{purchase.id}</option>
                 ))}
               </select>
 
               <select 
                 value={newClientId}
                 onChange={(e) => setNewClientId(Number(e.target.value))}
-                className="p-2 rounded-sm border border-cl2"
+                className="p-2 rounded-lg border border-cl2 mb-5"
               >
                 <option value={0}>Select Client</option>
-                {clients.map(client => (
-                  <option key={client.id} value={client.id}>{client.name}</option>
+                {purchases.map(purchase => (
+                  <option key={purchase.id} value={purchase.id_client}>{purchase.id_client}</option>
                 ))}
               </select>
               <input 
@@ -182,7 +158,7 @@ export default function Compras() {
                 value={newTotal}
                 onChange={(e) => setNewTotal(Number(e.target.value))}
                 placeholder="Total"
-                className="p-2 rounded-sm border border-cl2"
+                className="p-2 rounded-lg border border-cl2 mb-5"
               />
               <button 
                 type="submit"
