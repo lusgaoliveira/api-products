@@ -48,10 +48,12 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
     layout          -> Configuração de layout
     page            -> Página inicial (Home)
 
-
+```
 ## 🚀 Tecnologias Utilizadas
-
+```
+```
 ### Backend
+```
 
 - Node js
 - Express
@@ -61,20 +63,26 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
 - Docker
 - Dotenv
 
+```
 ### Mobile
+```
 
 - React Native
 - Expo
 - React Navigation
 
+```
 ### Web
+```
 
 - Next.js
 - Tailwind CSS
 - Axios
 - SWR
 
+```
 ## ✍ Utilização da API
+```
 
 Para rodar o projeto em sua máquina, siga as etapas abaixo:
 
@@ -112,8 +120,9 @@ docker-compose up
 ```
 npm start
 ```
-
+```
 ## ✍ Utilização do Mobile
+```
 
 Para rodar o aplicativo em sua máquina, siga as etapas abaixo:
 
@@ -142,8 +151,9 @@ npx expo start
     - Escaneie o QR Code exibido no terminal ou na interface do Expo usando o app Expo Go no seu dispositivo.
     - Alternativamente, execute o app em um emulador configurado.
 
-
+```
 ## ✍ Utilização da Web
+```
 
 Para rodar o projeto em sua máquina, siga as etapas abaixo:
 
