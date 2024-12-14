@@ -48,6 +48,7 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
     layout          -> Configuração de layout
     page            -> Página inicial (Home)
 
+
 ## 🚀 Tecnologias Utilizadas
 
 ### Backend
