@@ -34,6 +34,20 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
     /package.json   -> Dependências do projeto
     tsconfig.json   -> Configurações do TypeScript
 ```
+## 📁 Estrutura da Web
+
+```
+/app
+    /clientes       -> Responsável por exibir informações e cadastrar clientes com foco na utilização do usuário
+    /componentes    -> Responsável pela criação de componentes para reutilização nas páginas
+    /compras        -> Responsável pela exibição e cadastro de compras
+    /fonts          -> Responsável pela fontes do sistemas Web (Arquivo WOFF)
+    /produtos       -> Responsável pela exibição e cadastro de produtos
+    favicon         -> Ícone padrão do next.js
+    globals         -> Configuração global de estilização
+    layout          -> Configuração de layout
+    page            -> Página inicial (Home)
+
 ## 🚀 Tecnologias Utilizadas
 
 ### Backend
@@ -51,6 +65,13 @@ Nesse repositório há três pastas contendo um sistema básico de compras de pr
 - React Native
 - Expo
 - React Navigation
+
+### Web
+
+- Next.js
+- Tailwind CSS
+- Axios
+- SWR
 
 ## ✍ Utilização da API
 
@@ -121,6 +142,29 @@ npx expo start
     - Alternativamente, execute o app em um emulador configurado.
 
 
+## ✍ Utilização da Web
+
+Para rodar o projeto em sua máquina, siga as etapas abaixo:
+
+1. Clone o repositório:
+```
+https://github.com/lusgaoliveira/lolja.git
+```
+
+2. Entre na pasta do projeto e logo em seguida o frontend-lolja:
+```
+cd lolja
+cd frontend-lolja
+```
+
+3. Instale as dependências:
+```
+npm install
+
+4. Com o backend iniciado, inicie o servidor do frontend:
+```
+npm run dev
+```
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT.
